@@ -30,30 +30,6 @@ router.get(`/inscripcion`, (req, res)=>{
 
 });
 
-//Función Actualizar
-router.put(`/inscripcion`, (req, res)=>{
-    InscripcionSchema.find(function(err,datos){
-        if(err){
-            console.log("Error actualizando las inscripciones");
-        }else{
-            res.send(datos);
-        }
-    })
-
-});
-
-//Función Eliminar
-router.delete(`/inscripcion`, (req, res)=>{
-    InscripcionSchema.find(function(err,datos){
-        if(err){
-            console.log("Error eliminando las inscripciones");
-        }else{
-            res.send(datos);
-        }
-    })
-
-});
-
 //Función Crear
 router.post(`/inscripcion`, (req, res) =>{
     let nuevaInscripcion = new InscripcionSchema({
@@ -81,9 +57,57 @@ router.post(`/inscripcion`, (req, res) =>{
     })
 });
 
+//No se por qué las funciones Put y Delete me sale revisar algo, qué será?
+
+//Función Actualizar
+router.put(`/inscripcion-actualizar`, (req, res)=>{
+    InscripcionSchema.updateOne({idInscripcion:req.body.id}, {
+       
+   },
+
+   function (err,info){
+       if(err){
+           res.json({
+               resultado:false,
+               msg: 'No se puede actualizar la inscripcion',
+               error
+           });
+       }else{
+           res.send('La informacion fue actualizada');
+       }
+   }
+   )
+
+});
+
+//Función Eliminar
+router.delete('/inscripcion-eliminar/:id', (req, res ) => {
+    let params = req.params;
+    InscripcionSchema.deleteOne( {'idInscripcion': params.id}, {
+        $set: req.body
+    },
+    function (error, info){
+        if (error){
+            res.json({
+                resultado:false,
+                msg: 'No se puedo actualizar el documento ',
+                error
+            });
+        }else{
+            res.json({
+                resultado:true,
+                msg: 'Se elimnó la información ',
+                info: info,
+                body: req.params
+            });
+        }
+    })
+});
+
 
 app.use(router);
 app.listen(3000, () => {
     console.log("servidor corriendo en el puerto 3000")  
   });
-
+  
+  module.exports = router;
