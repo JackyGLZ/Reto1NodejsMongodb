@@ -1,0 +1,11 @@
+{
+  "name": "inmobiliariajs",
+  "version": "1.0.0",
+  "description": "api rest para inmobiliaria CRUD Jacky GL",
+  "main": "inmobiliaria.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jackeline Gonzalez L - Grupo 39",
+  "license": "ISC"
+}
