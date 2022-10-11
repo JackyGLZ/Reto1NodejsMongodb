@@ -57,8 +57,6 @@ router.post(`/inscripcion`, (req, res) =>{
     })
 });
 
-//No se por qué las funciones Put y Delete me sale revisar algo, qué será?
-
 //Función Actualizar
 router.put(`/inscripcion-actualizar`, (req, res)=>{
     InscripcionSchema.updateOne({idInscripcion:req.body.id}, {
